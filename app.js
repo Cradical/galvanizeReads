@@ -1,13 +1,29 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-// const morgan = require('morgan')
+const queries = require('./queries')
 const port = process.env.PORT || 3000
 const listener = () => console.log(`Listening to port ${port}!`)
 
-// app.use(morgan('dev'))
 app.disable('x-powered-by')
 app.use(bodyParser.json())
+
+//GET
+app.get('/authors', (req, res) => {
+  queries.listAllAuthors().then(authors => res.json({authors}))
+})
+
+app.get('/books', (req, res) =>{
+  queries.listAllBooks().then(books => res.json({books}))
+})
+
+app.get('/books&authors', (req, res) => {
+  queries.listAllBooksWithAuthors().then(bookAuthor => res.json({bookAuthor}))
+})
+
+//CREATE
+app.post('/')
+
 
 app.get('/ping', (req,res) => {
   res.send('PONG!')
