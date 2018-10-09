@@ -4,6 +4,7 @@ const database = require('knex')(connection)
 module.exports = {
 
     //READ ALL
+
     listAllAuthors() {
         return database('authors')
     },
@@ -27,12 +28,12 @@ module.exports = {
 
     addBook(newBook) {
         return database('books').insert(newBook).returning('*')
-    },
+    }
 
     //UPDATE
-    updateAuthor(, author_bio){
-        return database('authors').update
-    }
+    // updateAuthor( author_bio){
+    //     return database('authors').update
+    // }
 
 
 }

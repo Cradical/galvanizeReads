@@ -2,13 +2,19 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const queries = require('./queries')
+const cors = require('cors')
 const port = process.env.PORT || 3000
 const listener = () => console.log(`Listening to port ${port}!`)
 
 app.disable('x-powered-by')
 app.use(bodyParser.json())
+app.use(cors())
 
 //GET
+// app.get('/', (req, res) => {
+//   queries.getAll().then(data => res.json({data}))
+// })
+
 app.get('/authors', (req, res) => {
   queries.listAllAuthors().then(authors => res.json({authors}))
 })
