@@ -28,12 +28,12 @@ module.exports = {
 
     addBook(newBook) {
         return database('books').insert(newBook).returning('*')
-    }
+    },
 
     //UPDATE
-    // updateAuthor( author_bio){
-    //     return database('authors').update
-    // }
+    updateAuthor( author_bio){
+        return database('authors').update
+    }
 
 
 }
