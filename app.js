@@ -28,7 +28,10 @@ app.get('/books&authors', (req, res) => {
 })
 
 //CREATE
-app.post('/')
+app.post('/authors', (req, res) => {
+  console.log(req.body)
+  queries.addAuthor(req.body).then(status => res.json({status}))
+})
 
 
 app.get('/ping', (req,res) => {
