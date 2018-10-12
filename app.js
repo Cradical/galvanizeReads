@@ -10,11 +10,7 @@ app.disable('x-powered-by')
 app.use(bodyParser.json())
 app.use(cors())
 
-//GET
-// app.get('/', (req, res) => {
-//   queries.getAll().then(data => res.json({data}))
-// })
-
+//GET ROUTES
 app.get('/authors', (req, res) => {
   queries.listAllAuthors().then(authors => res.json({authors}))
 })
@@ -23,14 +19,19 @@ app.get('/books', (req, res) =>{
   queries.listAllBooks().then(books => res.json({books}))
 })
 
-app.get('/books&authors', (req, res) => {
-  queries.listAllBooksWithAuthors().then(bookAuthor => res.json({bookAuthor}))
+app.get('/booksAuthors', (req, res) => {
+  queries.listAllBooksAndAuthors().then(booksAuthors => res.json({booksAuthors}))
 })
 
-//CREATE
+//CREATE ROUTES
 app.post('/authors', (req, res) => {
   console.log(req.body)
   queries.addAuthor(req.body).then(status => res.json({status}))
+})
+
+//DELETE ROUTES
+app.delete('/deleteAuthor/:id', (req, res) => {
+  queries.deleteAuthorById(req.params.id).then(status => res.json({status}))
 })
 
 

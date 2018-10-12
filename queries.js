@@ -13,8 +13,12 @@ module.exports = {
         return database('books')
     },
 
-    listAllBooksWithAuthors(){
-        return database('books_authors')
+    listAllBooksAndAuthors(){
+        return database('authors')
+        .from('authors')
+        .orderBy('authors.id', 'asc')
+        .fullOuterJoin('books_authors', 'authors.id', 'books_authors.author_id') 
+        .fullOuterJoin('books', 'books.id', 'books_authors.book_id') 
     },
 
     getByTitle(book){
@@ -28,12 +32,13 @@ module.exports = {
 
     addBook(newBook) {
         return database('books').insert(newBook).returning('*')
-    }
+    },
 
     //UPDATE
-    // updateAuthor( author_bio){
-    //     return database('authors').update
-    // }
 
+    //DELETE
+    deleteAuthorById(id){
+        return database('authors').where('id', id).del()
+    }
 
 }
